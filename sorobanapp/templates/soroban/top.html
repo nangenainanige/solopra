@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4JV3LJF6Q"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Z4JV3LJF6Q');
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLOPRA そろばん独習サイト</title>
+    <link rel = "stylesheet" media = "screen and (max-width: 499.9px)" href="{% static 'css/wholecss/mobilewhole.css' %}">
+    <link rel = "stylesheet" media = "screen and (min-width: 500px) and (max-width: 999.9px)" href="{% static 'css/wholecss/tabletwhole.css' %}">
+    <link rel = "stylesheet" media = "screen and (min-width: 1000px)" href="{% static 'css/wholecss/pcwhole.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="solopra">
+            SOLOPRA
+            <a class="link" href="{% url 'index'%}"></a>
+        </div>
+        <div class="titlemenue">
+            <div class="titlepart"></div>
+            <div class="titlelogo">
+                <div class="soloprasub">ソロぷら</div>
+            </div>
+            <div class="titlepart"></div>
+            <div class="titlepart"></div>
+        </div>
+        <input type="checkbox" id="menuebtn">
+        <label class="menuebtn" for="menuebtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="hamberger">
+            <a class="hambergermenue" href="{% url 'index' %}">
+                HOME
+            </a>
+        
+            <a class="hambergermenue" href="{% url 'mitorizan' %}">
+                見取り算
+            </a>
+            <a class="hambergermenue" href="{% url 'kakezan' %}">
+                かけ算
+            </a>
+            <a class="hambergermenue" href="{% url 'warizan' %}">
+                わり算
+            </a>
+            <a class="hambergermenue" href="{% url 'contact' %}">
+                お問い合わせ
+            </a>
+        </div>
+        <div class="background"></div>
+    </header>
+    <div class="menue">
+        <a class="menuevalue" href="{% url 'index' %}">HOME</a>
+        <a class="menuevalue" href="{% url 'mitorizan' %}">見取り算</a>
+        <a class="menuevalue" href="{% url 'kakezan' %}">かけ算</a>
+        <a class="menuevalue" href="{% url 'warizan' %}">わり算</a>
+        <a class="menuevalue" href="{% url 'contact' %}">お問い合わせ</a>
+    </div>
+    <div class="topmain">
+        <div class="topmainelement">
+        <div class="toppagetitle">
+            <div class="kana">SOLOPRA</div>
+            <div class="dokushu">そろばん独習サイト</div>
+            <div class="kotaeru">あなたの解きたいに応える。</div>
+        </div>
+        <div class="toppagebottun">
+            <a href="{% url 'mitorizan' %}" class="mitorizanbottun">
+                <div class="mitoriplus">
+                    <div class="tate"></div>
+                    <div class="yoko1"></div>
+                </div>
+                <div class="mitoriminus"></div>
+                <div class="recommend">
+                    <div class="fukidashi">
+                        <div class="osusume">
+                            おすすめ！
+                        </div>
+                    </div>
+                    <div class="fukidashi2"></div>
+                </div>
+
+                <div class="mitorilevel">
+                    <div class="level">初心者</div>
+                    <div class="level">中級者</div>
+                </div>
+                <div class="mitoricomment">
+                    <p class="comment">解きたいレベルで</p>
+                    <p class="comment">そろばんを問題演習</p>
+                </div>
+                <div class="mitorigo">見取り算　　＞</div>
+            </a>
+            <div class="kakewari">
+                <a href="{% url 'kakezan' %}" class="kakezanbottun">
+                    <div class="kakewarizanmark">
+                        <div class="kakewarimarkab">
+                        <div class="kake1"></div>
+                        <div class="kake2"></div>
+                        </div>
+                    </div>
+                    <div class="kakewarilevel">
+                        <div class="level">上級者</div>
+                    </div>
+                    <div class="kakewarigo">かけ算　　＞</div>
+                </a>
+                <a href="{% url 'warizan' %}" class="warizanbottun">
+                    <div class="kakewarizanmark">
+                        <div class="kakewarimarkab">
+                        <div class="wari1"></div>
+                        <div class="wari2"></div>
+                        <div class="wari3"></div>
+                        </div>
+                    </div>
+                    <div class="kakewarilevel">
+                        <div class="level">上級者</div>
+                    </div>
+                    <div class="kakewarigo">わり算　　＞</div>
+                </a>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    <div class="topsub">
+        <div class="topsubmessagetitle">
+            ソロぷらでそろばん力がぐんぐん伸びる
+        </div>
+        <div class="topsubmessage">
+            <p>そろばんはとにかく手を動かすこと。あなたのレベルにあった問題でそろばんがめきめき上達！</p>
+            <p>指導者の方にもおすすめ。印刷して生徒さんの練習問題にもご利用いただけます。</p>
+        </div>
+        <div class="topdescribe">
+            <div class="topdescribechild">
+                <div class="markarea">
+                    <div class="mark">
+                        <div class="tate"></div>
+                        <div class="yoko1"></div>
+                    </div>
+                    <div class="mark">
+                        <div class="yoko2"></div>
+                    </div>
+                </div>
+                <div class="topdescribetitle">
+                    見取り算
+                </div>
+                <div class="topdescribemessage">
+                    <span class="pink">6段階の繰り上がりのレベル</span>を設定。最大20桁20口を50問まで無料で作成可能。
+                </div>
+            </div>
+            <div class="topdescribechild2">
+                <div class="markarea">
+                    <div class="mark">
+                        <div class="kake1"></div>
+                        <div class="kake2"></div>
+                    </div>
+                </div>
+                <div class="topdescribetitle">
+                    かけ算
+                </div>
+                <div class="topdescribemessage">
+                    最大7桁&times;7桁を100問まで<span class="pink">無料で</span>作成可能
+                </div>
+            </div>
+            <div class="topdescribechild3">
+                <div class="markarea">
+                    <div class="mark">
+                        <div class="wari1"></div>
+                        <div class="wari2"></div>
+                        <div class="wari3"></div>
+                    </div>
+                </div>
+                <div class="topdescribetitle">
+                    わり算
+                </div>
+                <div class="topdescribemessage">
+                    最大20桁&divide;20桁を100問まで<span class="pink">無料で</span>作成可能
+                </div>
+            </div>
+        </div>
+        <div class="challenge">
+            <div class="challengearea">
+                <div class="challengemessage pink">
+                    <p>早速無料で</p>
+                    <p>問題にチャレンジ！</p>
+                </div>
+                <div class="challengebottun">
+                    <a href="{% url 'mitorizan' %}">
+                    今すぐ開始
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="advertise">
+            広告主募集中！お問い合わせページにてご連絡ください！
+        </div>
+        
+        </div>
+
+
+    </div>
+    <div class="footer">
+        <div class="footersolopra">
+            <div class="footertitle font25">
+                SOLOPRA
+            </div>
+            <div class="footerelement"></div>
+        </div>
+        <div class="footerenshu">
+            <div class="footertitle">
+                問題演習
+            </div>
+            <div class="footerelement">
+                <p><a href="{% url 'mitorizan' %}">見取り算</a></p>
+                <p><a href="{% url 'kakezan' %}">かけ算</a></p>
+                <p><a href="{% url 'warizan' %}">わり算</a></p>
+            </div>
+        </div>        
+        <div class="footerotoiawase">
+            <div class="footertitle">
+                お問い合わせ
+            </div>
+            <div class="footerelement">
+                <p><a href="{% url 'contact' %}">お問い合わせフォーム</a></p>
+            </div>
+        </div>
+    </div>
+</body>

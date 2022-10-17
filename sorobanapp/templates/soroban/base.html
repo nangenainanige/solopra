@@ -1,0 +1,124 @@
+<!Doctype html>
+{% load static %}
+{% load widget_tweaks %}
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z4JV3LJF6Q"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Z4JV3LJF6Q');
+    </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link rel = "stylesheet" media = "print" href="{% static 'css/wholecss/printstyle.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
+  <link rel = "stylesheet" media = "screen and (max-width: 999.9px)" href="{% static 'css/wholecss/mobilewhole.css' %}">
+  <link rel = "stylesheet" media = "screen and (min-width:1000px)" href="{% static 'css/wholecss/pcwhole.css' %}">
+
+  
+</head>
+
+
+<body>
+    {% block ID %}
+    {% endblock%}
+<div class="header">
+    <div class="solopra">
+        SOLOPRA
+        <a class="link" href="{% url 'index'%}"></a>
+    </div>
+    <div class="titlemenue">
+        <div class="titlepart"></div>
+        <div class="titlelogo">
+            <div class="soloprasub">ソロぷら</div>
+        </div>
+        <div class="titlepart"></div>
+        <div class="titlepart"></div>
+    </div>
+    <input type="checkbox" id="menuebtn">
+    <label class="menuebtn" for="menuebtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    <div class="hamberger">
+      <a class="hambergermenue" href="{% url 'index' %}">
+          HOME
+      </a>
+  
+      <a class="hambergermenue" href="{% url 'mitorizan' %}">
+          見取り算
+      </a>
+      <a class="hambergermenue" href="{% url 'kakezan' %}">
+          かけ算
+      </a>
+      <a class="hambergermenue" href="{% url 'warizan' %}">
+          わり算
+      </a>
+      <a class="hambergermenue" href="{% url 'contact' %}">
+          お問い合わせ
+      </div>
+    </div>
+</div>
+{% block menuetag%}
+{% endblock %}
+<article class= "container">
+  <input type="checkbox" id="menue-btn-check">
+  <header class="menuebottun">
+    <div class="bottun">
+        <label for="menue-btn-check" class="menue-btn">
+        <span class="top"></span><span class="bottom"></span>
+        </label>
+    </div>
+    
+    {% block menue %}
+    {% endblock%}
+  </header>
+  {% block main %}
+  {% endblock %}
+</article>
+<div class="footer">
+    <div class="footersolopra">
+        <div class="footertitle font25">
+            solopra
+        </div>
+        <div class="footerelement"></div>
+    </div>
+    <div class="footerenshu">
+        <div class="footertitle">
+            問題演習
+        </div>
+        <div class="footerelement">
+            <p><a href="{% url 'mitorizan' %}">見取り算</a></p>
+            <p><a href="{% url 'kakezan' %}">かけ算</a></p>
+            <p><a href="{% url 'warizan' %}">わり算</a></p>
+        </div>
+    </div>        
+    <div class="footerotoiawase">
+        <div class="footertitle">
+            お問い合わせ
+        </div>
+        <div class="footerelement">
+            <p><a href="{% url 'contact' %}">お問い合わせフォーム</a></p>
+        </div>
+    </div>
+</div>
+<div class="newpage"></div>
+
+<!解答>
+{% block answer %}
+{% endblock %}
+
+<script src="{% static 'js/mitori.js' %}"></script>
+
+</body>
+</html>

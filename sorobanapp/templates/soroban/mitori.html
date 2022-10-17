@@ -1,0 +1,148 @@
+{% extends "soroban/base.html"%}
+{% load static %}
+{% load widget_tweaks %}
+
+  {% block ID %}
+  <div class = "ID">問題ID{{ID}}</div>
+  {% endblock%}
+{% block menuetag %}
+<div class="menue">
+  <a class="menuevalue" href="{% url 'index' %}">HOME</a>
+  <a class="choicemenuevalue" href="{% url 'mitorizan' %}">見取り算</a>
+  <a class="menuevalue" href="{% url 'kakezan' %}">かけ算</a>
+  <a class="menuevalue" href="{% url 'warizan' %}">わり算</a>
+  <a class="menuevalue" href="{% url 'contact' %}">お問い合わせ</a>
+</div>
+{% endblock%}
+
+{% block menue %}
+
+  <form action="{% url 'mitorizan'%}" method = "post" class = "form1">
+    {% csrf_token %}
+    <div class="menueshort">
+      <div class="formlabel" >桁数</div> 
+      <div>{{form.digit|add_class:"forms"}}</div>
+    </div>
+    <div class="menuelong">
+      <div class="formlabel">難易度</div>
+      <div>{{form.level|add_class:"forms"}}</div>
+    </div>
+    <div class="menueshort">
+      <div class="formlabel">口数</div>
+      <div  id="kuchi">{{form.qnumber|add_class:"forms"}}</div>
+    </div>
+    <div class="menueshort">
+      <div class="formlabel" id="question">問題数</div>
+      <div>{{form.questionnum|add_class:"forms"}}</div>
+    </div>
+      <div class="menuelong">
+        <input type = 'submit' value = "問題作成" class="questionbutton forms"> 
+      </div>
+      <div class="menuelong">
+        <input type = 'button' value="印刷はこちらから" onclick="window.print();" class="printbutton forms">
+      </div>
+    </div>
+  </form>
+  
+
+{% endblock%}
+
+
+{% block main %}
+<div class = "number">
+  {%for number in linenumber%}
+  <div class="numbertableborder">
+    <div class = "center-horizontal No">
+      No.
+    </div>
+    <div  class="center-vertical">
+      {%for kuchi in kuchinum%}
+        <p class="kaigyokuchikazu">{{kuchi}}</p>
+      {% endfor %}
+    </div>
+    <div class="numberanswervalue">
+      答
+    </div>
+  </div>
+  {% endfor%}
+</div>
+
+
+<div class="main" id="main">
+  <div class={{clickmessage}}>解答欄をクリックすると解答を表示できます</div>
+  <div class = {{message}}>
+    <p>桁数 難易度 口数 問題数を
+    </p>指定して<input type = 'submit' value = "問題作成" class="messagequestionbutton">を押してください</p>
+  </div>
+{%for mitori in mitorizan%}
+<div class="mitoritable">
+    
+      {% for num in mitori|slice:":1" %}
+      <div  class="center-horizontal No">
+        
+          {{num}}
+        {% endfor%}
+      </div>
+    
+      <div class = "value">
+        {%for value in mitori|slice:"2:"%}
+        <p class="kaigyovalue"  >
+          <span class="plus" id={{forloop.parentloop.counter}}{{forloop.parentloop.counter}}{{forloop.counter}} >
+            +
+          </span>
+          <span class="valueelement">
+            {{value}}
+          </span>
+        </p>
+        {% endfor %}
+      </div>
+      
+      <input type="checkbox" id={{forloop.counter}} name="answer" class="answervalue">
+      <label for={{forloop.counter}} class="answer">
+        {% for ans in mitori|slice:"1:2" %}
+          {{ans}}          
+        {% endfor%}                  
+      </label>
+
+</div>
+{% endfor%}
+</div>
+{% endblock %}
+
+{% block answer %}
+<div class= "printcontainer">
+  <div class="kaito">
+    解答
+  </div>
+  <div class = "ID">問題ID{{ID}}</div>
+  <div class="container">
+      <div class="number">
+          {%for number in linenumber%}
+          <div class="numbertableborder">
+            <div  class="No">
+              No.
+            </div>
+            <div class="numberanswervalue">
+              答
+            </div>
+          </div>        
+          {% endfor %}
+      </div>
+      <div class="printmain">
+          {%for mitori in mitorizan%}
+            <div class="mitoritable">
+              <div  class="No">
+                {% for num in mitori|slice:":1" %}
+                  {{num}}
+                {% endfor%}
+              </div>           
+              <div class="numberanswervalue">  
+                {% for ans in mitori|slice:"1:2" %}
+                  {{ans}}          
+                {% endfor%}                        
+              </div>
+            </div>
+          {% endfor%}
+      </div> 
+</div>
+{% endblock %}

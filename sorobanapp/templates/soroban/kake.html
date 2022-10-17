@@ -1,0 +1,130 @@
+{% extends "soroban/base.html"%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block ID %}
+{% endblock%}
+{% block menuetag %}
+<div class="menue">
+  <a class="menuevalue" href="{% url 'index' %}">HOME</a>
+  <a class="menuevalue" href="{% url 'mitorizan' %}">見取り算</a>
+  <a class="choicemenuevalue" href="{% url 'kakezan' %}">かけ算</a>
+  <a class="menuevalue" href="{% url 'warizan' %}">わり算</a>
+  <a class="menuevalue" href="{% url 'contact' %}">お問い合わせ</a>
+</div>
+{% endblock%}
+
+{% block menue %}
+
+  <form action="{% url 'kakezan'%}" method = "post" class = "form1">
+    {% csrf_token %}
+    <div class="menueshort">
+      <div class="formlabel">桁数(かけられる数)</div> 
+      <div>{{form.Kakeeddigit|add_class:"forms"}}</div>
+    </div>
+    <div class="menueshort">
+      <div class="formlabel">桁数(かける数)</div>
+      <div>{{form.Kakeingdigit|add_class:"forms"}}</div>
+    </div>
+    <div class="menueshort">
+      <div class="formlabel">問題数</div>
+      <div>{{form.Kakequestion|add_class:"forms"}}</div>
+    </div>
+      <div class="menuelong">
+        <input type = 'submit' value = "問題作成" class="questionbutton forms"> 
+      </div>
+      <div class="menuelong">
+        <input type = 'button' value="印刷はこちらから" onclick="window.print();" class="printbutton forms">
+      </div>
+    </div>
+  </form>
+  {% endblock%}
+
+  {% block main %}
+    <div class="main" id="kakemain">
+      <div class={{clickmessage}}>解答欄をクリックすると解答を表示できます</div>
+        <div class = {{message}}>
+            <p>桁数 問題数を
+            </p>指定して<input type = 'submit' value = "問題作成" class="messagequestionbutton">を押してください</p>
+          </div>
+    {% for kake in kakezan%}
+    <div class="table">
+    {% for ka in kake%}
+    <div class = "question">
+        <div class="kakeNo">
+            {%for No in ka|slice:":1"%}
+                {{No}}
+            {% endfor %}
+        </div>
+        <div class="ed">
+            {%for ed in ka|slice:"1:2"%}
+                {{ed}}
+            {% endfor %}
+        </div>
+        <div class="kakeru">
+            &times;
+        </div>
+        <div class="ing">
+            {%for ing in ka|slice:"2:3"%}
+                {{ing}}
+            {% endfor %}
+        </div>
+        <div class="equal">
+            =
+        </div>    
+        <input type="checkbox" id={{forloop.parentloop.counter}}{{forloop.counter}}>
+        <label for={{forloop.parentloop.counter}}{{forloop.counter}} class="kakeans" id="kakezan{{forloop.parentloop.counter}}{{forloop.counter}}">
+            <span class="kakeplus"  id="kakeplusA{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1,
+            </span>
+            <span class="kakeplus"  id="kakeplusB{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1
+            </span>
+            <span class="kakeanswer" id="kakeans{{forloop.parentloop.counter}}{{forloop.counter}}">                
+                {%for ans in ka|slice:"3:4"%}
+                    {{ans}}
+                {% endfor %}
+            </span>
+        </label>
+    </div>
+    {% endfor %}
+    </div>
+    {% endfor%}
+    </div>
+  {% endblock%}
+  <div class="newpage"></div>
+  {% block answer %}
+  <div class= "printcontainer">
+    <div class="kaito">
+      解答
+    </div>
+    <div class="main" id="kakemain">
+
+    {% for kake in kakezanans%}
+    <div class="table">
+    {% for ka in kake%}
+    <div class = "question">
+        <div class="kakeNo">
+            {%for No in ka|slice:":1"%}
+                {{No}}
+            {% endfor %}
+        </div>
+         <label for={{forloop.parentloop.counter}}{{forloop.counter}} class="kakeans" id="kakezan{{forloop.parentloop.counter}}{{forloop.counter}}">
+            <span class="kakeplus"  id="kakeplusA{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1,
+            </span>
+            <span class="kakeplus"  id="kakeplusB{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1
+            </span>
+            <span class="kakeanswer printkakeanswer" id="kakeans{{forloop.parentloop.counter}}{{forloop.counter}}">                
+                {%for ans in ka|slice:"3:4"%}
+                    {{ans}}
+                {% endfor %}
+            </span>
+        </label>
+    </div>
+    {% endfor %}
+    </div>
+    {% endfor%}
+    </div>
+  {% endblock %}

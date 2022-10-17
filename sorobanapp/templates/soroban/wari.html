@@ -1,0 +1,132 @@
+{% extends "soroban/base.html"%}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block menuetag %}
+<div class="menue">
+  <a class="menuevalue" href="{% url 'index' %}">HOME</a>
+  <a class="menuevalue" href="{% url 'mitorizan' %}">見取り算</a>
+  <a class="menuevalue" href="{% url 'kakezan' %}">かけ算</a>
+  <a class="choicemenuevalue" href="{% url 'warizan' %}">わり算</a>
+  <a class="menuevalue" href="{% url 'contact' %}">お問い合わせ</a>
+</div>
+{% endblock%}
+
+{% block menue %}
+
+  <form action="{% url 'warizan'%}" method = "post" class = "form1" name="form1">
+    {% csrf_token %}
+    <div class="menueshort">
+      <div class="formlabel">桁数(わられる数)</div> 
+      <div>{{form.warieddigit|add_class:"forms"}}</div>
+    </div>
+    <div class="menueshort">
+      <div class="formlabel">桁数(わる数)</div>
+      <div>{{form.wariingdigit|add_class:"forms"}}</div>
+      
+    </div>
+    <div class="menueshort">
+      <div class="formlabel">問題数</div>
+      <div>{{form.wariquestion|add_class:"forms"}}</div>
+    </div>
+      <div class="menuelong">
+        <input type = 'submit' value = "問題作成" id="warizanbottun" class="questionbutton forms"> 
+      </div>
+      <div class="menuelong">
+        <input type = 'button' value="印刷はこちらから" onclick="window.print();" class="printbutton forms">
+      </div>
+    </div>
+  </form>
+  {% endblock%}
+
+  {% block main %}
+    <div class="main" id="warimain">
+      <div class={{clickmessage}}>解答欄をクリックすると解答を表示できます</div>
+        <div class = {{message}}>
+            <p>桁数 問題数を
+            </p>指定して<input type = 'submit' value = "問題作成" class="messagequestionbutton">を押してください</p>
+          </div>
+    {% for wari in warizan%}
+    <div class="table">
+    {% for wa in wari%}
+    <div class = "question">
+        <div class="wariNo">
+            {%for No in wa|slice:":1"%}
+                {{No}}
+            {% endfor %}
+        </div>
+        <div class="ed">
+            {%for ed in wa|slice:"1:2"%}
+                {{ed}}
+            {% endfor %}
+        </div>
+        <div class="waru">
+            &divide;
+        </div>
+        <div class="ing">
+            {%for ing in wa|slice:"2:3"%}
+                {{ing}}
+            {% endfor %}
+        </div>
+        <div class="equal">
+            =
+        </div>
+        <input type="checkbox" id={{forloop.parentloop.counter}}{{forloop.counter}}>
+        <label for={{forloop.parentloop.counter}}{{forloop.counter}} class="warians" id="warizan{{forloop.parentloop.counter}}{{forloop.counter}}">
+            <span class="wariplus"  id="wariplusA{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1,
+            </span>
+            <span class="wariplus"  id="wariplusB{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1
+            </span>
+            <span class="warianswer" id="warians{{forloop.parentloop.counter}}{{forloop.counter}}">                
+                {%for ans in wa|slice:"3:4"%}
+                    {{ans}}
+                {% endfor %}
+            </span>
+        </label>
+    </div>
+    {% endfor %}
+    </div>
+    {% endfor%}
+    </div>
+  {% endblock%}
+  <div class="newpage"></div>
+
+  {% block answer %}
+  <div class= "printcontainer">
+    <div class="kaito">
+      解答
+    </div>
+    <div class="main" id="warimain">
+
+    {% for wari in warizanans%}
+    <div class="table">
+    {% for wa in wari%}
+    <div class = "question">
+        <div class="wariNo">
+            {%for No in wa|slice:":1"%}
+                {{No}}
+            {% endfor %}
+        </div>
+         <label for={{forloop.parentloop.counter}}{{forloop.counter}} class="warians" id="warizan{{forloop.parentloop.counter}}{{forloop.counter}}">
+            <span class="wariplus"  id="wariplusA{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1,
+            </span>
+            <span class="wariplus"  id="wariplusB{{forloop.parentloop.counter}}{{forloop.counter}}">
+                1
+            </span>
+            <span class="warianswer printwarianswer" id="warians{{forloop.parentloop.counter}}{{forloop.counter}}">                
+                {%for ans in wa|slice:"3:4"%}
+                    {{ans}}
+                {% endfor %}
+            </span>
+        </label>
+    </div>
+    {% endfor %}
+    </div>
+    {% endfor%}
+    </div>
+  {% endblock %}
+
